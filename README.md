@@ -1,198 +1,47 @@
-# Template for Isaac Lab Projects
 
-[![IsaacSim](https://img.shields.io/badge/IsaacSim-4.5.0-silver.svg)](https://docs.omniverse.nvidia.com/isaacsim/latest/overview.html)
-[![Isaac Lab](https://img.shields.io/badge/IsaacLab-2.1.0-silver)](https://isaac-sim.github.io/IsaacLab)
-[![Python](https://img.shields.io/badge/python-3.10-blue.svg)](https://docs.python.org/3/whatsnew/3.10.html)
-[![Linux platform](https://img.shields.io/badge/platform-linux--64-orange.svg)](https://releases.ubuntu.com/20.04/)
-[![Windows platform](https://img.shields.io/badge/platform-windows--64-orange.svg)](https://www.microsoft.com/en-us/)
-[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://pre-commit.com/)
-[![License](https://img.shields.io/badge/license-MIT-yellow.svg)](https://opensource.org/license/mit)
+# Go2 Policies for Unitree Robot
 
-## Overview
+This repository contains an Isaac Lab extension for training a variety of reinforcement learning policies for the Unitree Go2 robot.
 
-This repository serves as a template for building projects or extensions based on Isaac Lab. It allows you to develop in an isolated environment, outside of the core Isaac Lab repository.
+## Policies and Tasks
 
-**Key Features:**
+| Policy Name | Isaac Lab Task | Description |
+|:-:|:-:|:-:|
+|  |  |  |
 
-- `Isolation` Work outside the core Isaac Lab repository, ensuring that your development efforts remain self-contained.
-- `Flexibility` This template is set up to allow your code to be run as an extension in Omniverse.
+## Running Policies
 
-**Keywords:** extension, template, isaaclab
+The recommended way to run and train policies is via Docker, using the Isaac Lab base image. The base image is best managed using the environment scripts provided in [accrobotics/envs](https://github.com/AccRobotics/envs).
 
-## Installation
+### Quick Start
 
-- Install Isaac Lab by following the [installation guide](https://isaac-sim.github.io/IsaacLab/main/source/setup/installation/index.html). We recommend using the conda installation as it simplifies calling Python scripts from the terminal.
+1. **Clone this repository** (and [accrobotics/envs](https://github.com/AccRobotics/envs) if not already):
 
-- Clone this repository separately from the Isaac Lab installation (i.e. outside the `IsaacLab` directory):
+    ```bash
+    git clone https://github.com/AccRobotics/go2-policies.git
+    git clone https://github.com/AccRobotics/envs.git
+    ```
 
-```bash
-# Option 1: HTTPS
-git clone https://github.com/isaac-sim/IsaacLabExtensionTemplate.git
+2. **Set up the Isaac Lab Docker environment** using the scripts in `accrobotics/envs` (see that repo for details).
 
-# Option 2: SSH
-git clone git@github.com:isaac-sim/IsaacLabExtensionTemplate.git
-```
+3. **Build and run the container** for this project:
 
-- Throughout the repository, the name `ext_template` only serves as an example and we provide a script to rename all the references to it automatically:
+    ```bash
+    cd go2-policies/docker
+    # Edit .env.base as needed, then:
+    docker compose --env-file .env.base --file docker-compose.yaml up --build
+    ```
 
-```bash
-# Enter the repository
-cd IsaacLabExtensionTemplate
-# Rename all occurrences of ext_template (in files/directories) to your_fancy_extension_name
-python scripts/rename_template.py your_fancy_extension_name
-```
+4. **Train or run a policy** inside the container:
 
-- Using a python interpreter that has Isaac Lab installed, install the library
+    ```bash
+    # Example: train a policy (replace with your actual command)
+    python scripts/rsl_rl/train.py --task=<Your-Task-Name>
+    ```
 
-```bash
-python -m pip install -e source/ext_template
-```
+> **Note:** For best results, always use the Isaac Lab base image and environment setup from accrobotics/envs to ensure compatibility.
 
-- Verify that the extension is correctly installed by running the following command:
+## Sim2Real Transfer
 
-```bash
-python scripts/rsl_rl/train.py --task=Template-Isaac-Velocity-Rough-Anymal-D-v0
-```
+Instructions for sim2real transfer are to be determined (TBD).
 
-### Set up IDE (Optional)
-
-To setup the IDE, please follow these instructions:
-
-- Run VSCode Tasks, by pressing `Ctrl+Shift+P`, selecting `Tasks: Run Task` and running the `setup_python_env` in the drop down menu. When running this task, you will be prompted to add the absolute path to your Isaac Sim installation.
-
-If everything executes correctly, it should create a file .python.env in the `.vscode` directory. The file contains the python paths to all the extensions provided by Isaac Sim and Omniverse. This helps in indexing all the python modules for intelligent suggestions while writing code.
-
-### Setup as Omniverse Extension (Optional)
-
-We provide an example UI extension that will load upon enabling your extension defined in `source/ext_template/ext_template/ui_extension_example.py`.
-
-To enable your extension, follow these steps:
-
-1. **Add the search path of your repository** to the extension manager:
-    - Navigate to the extension manager using `Window` -> `Extensions`.
-    - Click on the **Hamburger Icon** (☰), then go to `Settings`.
-    - In the `Extension Search Paths`, enter the absolute path to `IsaacLabExtensionTemplate/source`
-    - If not already present, in the `Extension Search Paths`, enter the path that leads to Isaac Lab's extension directory directory (`IsaacLab/source`)
-    - Click on the **Hamburger Icon** (☰), then click `Refresh`.
-
-2. **Search and enable your extension**:
-    - Find your extension under the `Third Party` category.
-    - Toggle it to enable your extension.
-
-## Docker setup
-
-### Building Isaac Lab Base Image
-
-Currently, we don't have the Docker for Isaac Lab publicly available. Hence, you'd need to build the docker image
-for Isaac Lab locally by following the steps [here](https://isaac-sim.github.io/IsaacLab/main/source/deployment/index.html).
-
-Once you have built the base Isaac Lab image, you can check it exists by doing:
-
-```bash
-docker images
-
-# Output should look something like:
-#
-# REPOSITORY                       TAG       IMAGE ID       CREATED          SIZE
-# isaac-lab-base                   latest    28be62af627e   32 minutes ago   18.9GB
-```
-
-### Building Isaac Lab Template Image
-
-Following above, you can build the docker container for this project. It is called `isaac-lab-template`. However,
-you can modify this name inside the [`docker/docker-compose.yaml`](docker/docker-compose.yaml).
-
-```bash
-cd docker
-docker compose --env-file .env.base --file docker-compose.yaml build isaac-lab-template
-```
-
-You can verify the image is built successfully using the same command as earlier:
-
-```bash
-docker images
-
-# Output should look something like:
-#
-# REPOSITORY                       TAG       IMAGE ID       CREATED             SIZE
-# isaac-lab-template               latest    00b00b647e1b   2 minutes ago       18.9GB
-# isaac-lab-base                   latest    892938acb55c   About an hour ago   18.9GB
-```
-
-### Running the container
-
-After building, the usual next step is to start the containers associated with your services. You can do this with:
-
-```bash
-docker compose --env-file .env.base --file docker-compose.yaml up
-```
-
-This will start the services defined in your `docker-compose.yaml` file, including isaac-lab-template.
-
-If you want to run it in detached mode (in the background), use:
-
-```bash
-docker compose --env-file .env.base --file docker-compose.yaml up -d
-```
-
-### Interacting with a running container
-
-If you want to run commands inside the running container, you can use the `exec` command:
-
-```bash
-docker exec --interactive --tty -e DISPLAY=${DISPLAY} isaac-lab-template /bin/bash
-```
-
-### Shutting down the container
-
-When you are done or want to stop the running containers, you can bring down the services:
-
-```bash
-docker compose --env-file .env.base --file docker-compose.yaml down
-```
-
-This stops and removes the containers, but keeps the images.
-
-## Code formatting
-
-We have a pre-commit template to automatically format your code.
-To install pre-commit:
-
-```bash
-pip install pre-commit
-```
-
-Then you can run pre-commit with:
-
-```bash
-pre-commit run --all-files
-```
-
-## Troubleshooting
-
-### Pylance Missing Indexing of Extensions
-
-In some VsCode versions, the indexing of part of the extensions is missing. In this case, add the path to your extension in `.vscode/settings.json` under the key `"python.analysis.extraPaths"`.
-
-```json
-{
-    "python.analysis.extraPaths": [
-        "<path-to-ext-repo>/source/ext_template"
-    ]
-}
-```
-
-### Pylance Crash
-
-If you encounter a crash in `pylance`, it is probable that too many files are indexed and you run out of memory.
-A possible solution is to exclude some of omniverse packages that are not used in your project.
-To do so, modify `.vscode/settings.json` and comment out packages under the key `"python.analysis.extraPaths"`
-Some examples of packages that can likely be excluded are:
-
-```json
-"<path-to-isaac-sim>/extscache/omni.anim.*"         // Animation packages
-"<path-to-isaac-sim>/extscache/omni.kit.*"          // Kit UI tools
-"<path-to-isaac-sim>/extscache/omni.graph.*"        // Graph UI tools
-"<path-to-isaac-sim>/extscache/omni.services.*"     // Services tools
-...
-```
