@@ -13,9 +13,9 @@ COPY ../ ${DOCKER_ISAACLAB_EXTENSION_TEMPLATE_PATH}
 
 # # Install whatever you need as additional dependencies.
 RUN bash -i -c "source ${HOME}/.bashrc && \
-    cd ${DOCKER_ISAACLAB_EXTENSION_TEMPLATE_PATH}/source/accrobotics-go2 && \
+    cd ${DOCKER_ISAACLAB_EXTENSION_TEMPLATE_PATH}/source/accrobotics_go2 && \
     pip install -e ."
 
 # make working directory as the Isaac Lab directory
 # this is the default directory when the container is run
-WORKDIR /workspace
+WORKDIR ${DOCKER_ISAACLAB_EXTENSION_TEMPLATE_PATH}

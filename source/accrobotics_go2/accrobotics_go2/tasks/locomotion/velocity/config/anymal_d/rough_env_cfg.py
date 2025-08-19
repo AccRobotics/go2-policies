@@ -1,6 +1,6 @@
 from isaaclab.utils import configclass
 
-from accrobotics-go2.tasks.locomotion.velocity.velocity_env_cfg import LocomotionVelocityRoughEnvCfg
+from accrobotics_go2.tasks.locomotion.velocity.velocity_env_cfg import LocomotionVelocityRoughEnvCfg
 
 ##
 # Pre-defined configs

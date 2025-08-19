@@ -1,4 +1,4 @@
-"""Installation script for the 'accrobotics-go2' python package."""
+"""Installation script for the 'accrobotics_go2' python package."""
 
 import os
 import toml
@@ -18,8 +18,8 @@ INSTALL_REQUIRES = [
 
 # Installation operation
 setup(
-    name="accrobotics-go2",
-    packages=["accrobotics-go2"],
+    name="accrobotics_go2",
+    packages=["accrobotics_go2"],
     author=EXTENSION_TOML_DATA["package"]["author"],
     maintainer=EXTENSION_TOML_DATA["package"]["maintainer"],
     url=EXTENSION_TOML_DATA["package"]["repository"],
