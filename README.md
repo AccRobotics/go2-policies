@@ -11,11 +11,11 @@ This repository contains an Isaac Lab extension for training a variety of reinfo
 
 ## Running Policies
 
-The recommended way to run and train policies is via Docker, using our Isaac Lab base docker image.
+The recommended way to run and train policies is via Docker, using the Isaac Lab base docker image.
 
 ### Quick Start
 
-1. **Clone this repository** (and [accrobotics/envs](https://github.com/AccRobotics/envs) if not already):
+1. **Clone this repository**:
 
     ```bash
     git clone https://github.com/AccRobotics/go2-policies.git
