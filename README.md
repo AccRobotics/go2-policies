@@ -11,7 +11,19 @@ This repository contains an Isaac Lab extension for training a variety of reinfo
 
 ## Running Policies
 
-The recommended way to run and train policies is via Docker, using the Isaac Lab base docker image.
+The recommended way to run and train policies is via Docker, using the official Nvidia Isaac Lab base image.
+
+### Prerequisites
+
+Before running the Docker container, you need to authenticate with the Nvidia Container Registry to pull the Isaac Lab base image:
+
+```bash
+docker login nvcr.io
+# Username: $oauthtoken
+# Password: <your-ngc-api-key>
+```
+
+You can get an NGC API key from the [Nvidia NGC portal](https://ngc.nvidia.com/setup/api-key).
 
 ### Quick Start
 
@@ -19,20 +31,18 @@ The recommended way to run and train policies is via Docker, using the Isaac Lab
 
     ```bash
     git clone https://github.com/AccRobotics/go2-policies.git
-    git clone https://github.com/AccRobotics/envs.git
+    cd go2-policies
     ```
 
-2. **Set up the Isaac Lab Docker environment** using the scripts in `accrobotics/envs` (see that repo for details).
-
-3. **Build and run the container** for this project:
+2. **Build and run the container**:
 
     ```bash
-    cd go2-policies/docker
+    cd docker
     # Edit .env.base as needed, then:
     docker compose --env-file .env.base --file docker-compose.yaml up --build
     ```
 
-4. **Train or run a policy** inside the container:
+3. **Train or run a policy** inside the container:
 
     ```bash
     # Example: train a policy (replace with your actual command)
