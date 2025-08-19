@@ -11,7 +11,7 @@ This repository contains an Isaac Lab extension for training a variety of reinfo
 
 ## Running Policies
 
-The recommended way to run and train policies is via Docker, using the Isaac Lab base image. The base image is best managed using the environment scripts provided in [accrobotics/envs](https://github.com/AccRobotics/envs).
+The recommended way to run and train policies is via Docker, using our Isaac Lab base docker image.
 
 ### Quick Start
 
@@ -38,8 +38,6 @@ The recommended way to run and train policies is via Docker, using the Isaac Lab
     # Example: train a policy (replace with your actual command)
     python scripts/rsl_rl/train.py --task=<Your-Task-Name>
     ```
-
-> **Note:** For best results, always use the Isaac Lab base image and environment setup from accrobotics/envs to ensure compatibility.
 
 ## Sim2Real Transfer
 
