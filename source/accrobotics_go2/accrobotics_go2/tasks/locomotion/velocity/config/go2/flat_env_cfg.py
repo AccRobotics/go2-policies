@@ -1,18 +1,17 @@
 from isaaclab.utils import configclass
 
-from .rough_env_cfg import AnymalDRoughEnvCfg
+from .rough_env_cfg import Go2RoughEnvCfg
 
 
 @configclass
-class AnymalDFlatEnvCfg(AnymalDRoughEnvCfg):
+class Go2FlatEnvCfg(Go2RoughEnvCfg):
     def __post_init__(self):
         # post init of parent
         super().__post_init__()
 
-        # override rewards
-        self.rewards.flat_orientation_l2.weight = -5.0
-        self.rewards.dof_torques_l2.weight = -2.5e-5
-        self.rewards.feet_air_time.weight = 0.5
+        # override rewards to match official Go2 flat config
+        self.rewards.flat_orientation_l2.weight = -2.5
+        self.rewards.feet_air_time.weight = 0.25
         # change terrain to flat
         self.scene.terrain.terrain_type = "plane"
         self.scene.terrain.terrain_generator = None
@@ -23,7 +22,7 @@ class AnymalDFlatEnvCfg(AnymalDRoughEnvCfg):
         self.curriculum.terrain_levels = None
 
 
-class AnymalDFlatEnvCfg_PLAY(AnymalDFlatEnvCfg):
+class Go2FlatEnvCfg_PLAY(Go2FlatEnvCfg):
     def __post_init__(self) -> None:
         # post init of parent
         super().__post_init__()
