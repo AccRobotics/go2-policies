@@ -42,7 +42,7 @@ You can get an NGC API key from the [Nvidia NGC portal](https://ngc.nvidia.com/s
     docker compose --env-file .env.base --file docker-compose.yaml up --build
     ```
 
-3. **Train or run a policy** inside the container:
+3. **Train or run a policy** inside the container (for instance via `docker exec -it accrobotics-isaaclab bash`):
 
     ```bash
     # Example: train a policy (replace with your actual command)
