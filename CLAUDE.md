@@ -32,37 +32,48 @@ docker compose --env-file .env.base --file docker-compose.yaml up --build
 docker exec -it accrobotics-isaaclab bash
 ```
 
+### Python Usage
+Python is available through Isaac Lab's wrapper script. Commands can be run either inside the container (using the `python` alias) or from outside:
+
+```bash
+# From outside the container
+docker exec accrobotics-isaaclab /workspace/isaaclab/_isaac_sim/python.sh --version
+
+# Inside the container (interactive session)
+docker exec -it accrobotics-isaaclab bash
+python --version  # Uses alias from bashrc
+```
+
 ### Training Policies
 ```bash
-# Train a policy on flat terrain
+# From outside container
+docker exec accrobotics-isaaclab /workspace/isaaclab/_isaac_sim/python.sh scripts/rsl_rl/train.py --task=Isaac-Velocity-Flat-Go2-v0 --headless
+
+# Inside container (using alias)
 python scripts/rsl_rl/train.py --task=Isaac-Velocity-Flat-Go2-v0 --headless
-
-# Train a policy on rough terrain
 python scripts/rsl_rl/train.py --task=Isaac-Velocity-Rough-Go2-v0 --headless
-
-# Train with video recording
 python scripts/rsl_rl/train.py --task=Isaac-Velocity-Flat-Go2-v0 --video
-
-# Train with custom parameters
 python scripts/rsl_rl/train.py --task=Isaac-Velocity-Flat-Go2-v0 --num_envs 4096 --max_iterations 1000 --headless
 ```
 
 ### Running/Testing Trained Policies
 ```bash
-# Run a trained policy (automatically exports ONNX and JIT formats)
-python scripts/rsl_rl/play.py --task=Isaac-Velocity-Flat-Go2-v0 --load_run=<run_name>
---livestream=2
+# From outside container
+docker exec accrobotics-isaaclab /workspace/isaaclab/_isaac_sim/python.sh scripts/rsl_rl/play.py --task=Isaac-Velocity-Flat-Go2-v0 --load_run=<run_name> --livestream=2
 
-# Run with video recording
+# Inside container (using alias)
+python scripts/rsl_rl/play.py --task=Isaac-Velocity-Flat-Go2-v0 --load_run=<run_name> --livestream=2
 python scripts/rsl_rl/play.py --task=Isaac-Velocity-Flat-Go2-v0 --load_run=<run_name> --video
 ```
 
 ### Code Quality
 ```bash
-# Format code with isort (configured in pyproject.toml)
-isort source/
+# From outside container
+docker exec accrobotics-isaaclab /workspace/isaaclab/_isaac_sim/python.sh -m isort source/
+docker exec accrobotics-isaaclab /workspace/isaaclab/_isaac_sim/python.sh -m pyright source/
 
-# Type checking with pyright (configured in pyproject.toml)
+# Inside container (using aliases)
+isort source/  # Uses pip alias from bashrc
 pyright source/
 ```
 
