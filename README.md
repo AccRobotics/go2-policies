@@ -49,6 +49,10 @@ You can get an NGC API key from the [Nvidia NGC portal](https://ngc.nvidia.com/s
     python scripts/rsl_rl/train.py --task=<Your-Task-Name>
     ```
 
+4. **Monitor training with TensorBoard**:
+
+    TensorBoard is automatically started as part of the Docker Compose setup and is accessible at [http://localhost:6006](http://localhost:6006).
+
 ## Sim2Real Transfer
 
 Instructions for sim2real transfer are to be determined (TBD).

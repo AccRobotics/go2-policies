@@ -31,3 +31,16 @@ services:
     entrypoint: bash
     stdin_open: true
     tty: true
+
+  tensorboard:
+    image: tensorflow/tensorflow:latest
+    container_name: tensorboard
+    ports:
+      - "6006:6006"
+    volumes:
+      - type: bind
+        source: ../logs
+        target: /logs
+    command: tensorboard --logdir=/logs --host=0.0.0.0 --port=6006
+    depends_on:
+      - accrobotics-isaaclab
