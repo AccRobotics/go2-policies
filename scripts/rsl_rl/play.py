@@ -94,11 +94,18 @@ def main():
 
     # export policy to onnx/jit
     export_model_dir = os.path.join(os.path.dirname(resume_path), "exported")
+    try:
+        # Version 2.3 onwards
+        policy_nn = ppo_runner.alg.policy
+    except AttributeError:
+        # Version 2.2 and below
+        policy_nn = ppo_runner.alg.actor_critic
+    
     export_policy_as_jit(
-        ppo_runner.alg.actor_critic, ppo_runner.obs_normalizer, path=export_model_dir, filename="policy.pt"
+        policy_nn, ppo_runner.obs_normalizer, path=export_model_dir, filename="policy.pt"
     )
     export_policy_as_onnx(
-        ppo_runner.alg.actor_critic, normalizer=ppo_runner.obs_normalizer, path=export_model_dir, filename="policy.onnx"
+        policy_nn, normalizer=ppo_runner.obs_normalizer, path=export_model_dir, filename="policy.onnx"
     )
 
     # reset environment
