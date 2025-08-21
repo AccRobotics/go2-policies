@@ -7,7 +7,14 @@ This repository contains an Isaac Lab extension for training a variety of reinfo
 
 | Policy Name | Isaac Lab Task | Description |
 |:-:|:-:|:-:|
-|  |  |  |
+| Base Velocity Flat | Base-Velocity-Flat-Unitree-Go2-v0 | Go2 locomotion on flat terrain (base Isaac Lab implementation) |
+| Base Velocity Flat (Play) | Base-Velocity-Flat-Unitree-Go2-Play-v0 | Go2 locomotion on flat terrain (play/inference mode) |
+| Base Velocity Rough | Base-Velocity-Rough-Unitree-Go2-v0 | Go2 locomotion on rough terrain (base Isaac Lab implementation) |
+| Base Velocity Rough (Play) | Base-Velocity-Rough-Unitree-Go2-Play-v0 | Go2 locomotion on rough terrain (play/inference mode) |
+| Quiet Velocity Flat | Acc-QuietVelocity-Flat-Unitree-Go2-v0 | Custom quiet locomotion policy on flat terrain |
+| Quiet Velocity Flat (Play) | Acc-QuietVelocity-Flat-Unitree-Go2-Play-v0 | Custom quiet locomotion policy on flat terrain (play/inference mode) |
+| Quiet Velocity Rough | Acc-QuietVelocity-Rough-Unitree-Go2-v0 | Custom quiet locomotion policy on rough terrain |
+| Quiet Velocity Rough (Play) | Acc-QuietVelocity-Rough-Unitree-Go2-Play-v0 | Custom quiet locomotion policy on rough terrain (play/inference mode) |
 
 ## Running Policies
 

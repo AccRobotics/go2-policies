@@ -2,5 +2,5 @@
 Python module serving as a project/extension template.
 """
 
-# Register Gym environments.
+from .mdp import *
 from .tasks import *
