@@ -1,6 +1,9 @@
 from isaaclab.utils import configclass
+from isaaclab.managers import RewardTermCfg as RewTerm
+from isaaclab.managers import SceneEntityCfg
 
 from accrobotics_go2.tasks.locomotion.velocity.velocity_env_cfg import LocomotionVelocityRoughEnvCfg
+import accrobotics_go2.tasks.locomotion.velocity.mdp as mdp
 
 ##
 # Pre-defined configs
@@ -45,6 +48,21 @@ class Go2RoughEnvCfg(LocomotionVelocityRoughEnvCfg):
             self.rewards.dof_torques_l2.weight = -0.0002
         if hasattr(self.rewards, 'dof_acc_l2'):
             self.rewards.dof_acc_l2.weight = -2.5e-7
+        
+        # Add foot deceleration reward to reduce impact noise while preserving air time
+        self.rewards.foot_deceleration = RewTerm(
+            func=mdp.foot_deceleration_swing_phase,
+            weight=0.25,
+            params={
+                "sensor_cfg": SceneEntityCfg("contact_forces", body_names=".*_foot"),
+                "asset_cfg": SceneEntityCfg("robot"),
+                "velocity_threshold": 0.3,
+                "min_air_time": 0.05,  # Ensure minimum air time before deceleration
+                "deceleration_phase": 0.1,  # Duration of final swing phase
+                "debug": False,  # Set to True to enable debug logging
+                "debug_print_freq": 100,  # Print debug info every N steps
+            },
+        )
 
 
 @configclass
