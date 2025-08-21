@@ -4,11 +4,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Overview
 
-This is an Isaac Lab extension for training reinforcement learning policies for the Unitree Go2 robot. See README.md for general project information and setup instructions.
+This is an Isaac Lab extension for training reinforcement learning policies for various robots. See README.md for general project information and setup instructions.
 
 ## Project Structure (for Claude's reference)
 
-- `source/accrobotics_go2/accrobotics_go2/` - Main Python package
+- `source/accrobotics/accrobotics/` - Main Python package
   - `tasks/go2/base.py` - Baseline environments from official Isaac Lab 
   - `tasks/go2/quiet.py` - Custom quiet locomotion environments with foot deceleration rewards
   - `mdp/rewards.py` - Custom reward functions including `foot_deceleration_swing_phase`

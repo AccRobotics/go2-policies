@@ -1,7 +1,7 @@
 
-# Go2 Policies for Unitree Robot
+# Isaac Lab Policies
 
-This repository contains an Isaac Lab extension for training a variety of reinforcement learning policies for the Unitree Go2 robot.
+This repository contains an Isaac Lab extension for training a variety of reinforcement learning policies for real world robots.
 
 ## Policies and Tasks
 
@@ -37,8 +37,8 @@ You can get an NGC API key from the [Nvidia NGC portal](https://ngc.nvidia.com/s
 1. **Clone this repository**:
 
     ```bash
-    git clone https://github.com/AccRobotics/go2-policies.git
-    cd go2-policies
+    git clone https://github.com/AccRobotics/isaaclab.git
+    cd isaaclab
     ```
 
 2. **Build and run the container**:

@@ -28,7 +28,7 @@ from isaaclab_tasks.manager_based.locomotion.velocity.config.go2.rough_env_cfg i
     UnitreeGo2RoughEnvCfg_PLAY,
 )
 
-import accrobotics_go2.mdp as mdp
+import accrobotics.mdp as mdp
 
 # Shared reward term for foot deceleration to keep code simple and consistent
 foot_deceleration_swing_phase = RewTerm(
